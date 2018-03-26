@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:wicket="http://www.wicket.apache.org">
+<head>
+<meta charset="UTF-8" />
+<title>Wicket - Agenda Eletrônica</title>
+</head>
+<body>
+	<h1>Wicket - Agenda Eletrônica</h1>
+	<div id="blocoEsquerdo">
+		<wicket:link>
+			<a href="Inicio.html">Início</a>
+			<br />
+			<a href="Criar.html">Adicionar Contato</a>
+			<br />
+			<a href="Pesquisar.html">Pesquisar Contatos</a>
+		</wicket:link>
+	</div>
+
+	<div id="blocoDireito">
+		<!-- A pagina filha vem aqui -->
+		<wicket:child />
+	</div>
+
+	<footer>
+		<hr />
+		TimTec&nbsp;&nbsp;&bull;&nbsp;&nbsp;<a href="#">Sair</a>
+	</footer>
+
+</body>
+</html>
