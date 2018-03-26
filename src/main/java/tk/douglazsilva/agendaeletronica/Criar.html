@@ -6,7 +6,16 @@
 </head>
 <body>
 	<wicket:extend>
-		<p wicket:id="titulo">[titulo]</p>
+		<h1 wicket:id="titulo">[titulo]</h1>
+		<form wicket:id="formularioContato" name="formularioContato">
+			<input wicket:id="nome" type="text" placeholder="nome"/>
+			<br/>
+			<input wicket:id="email" type="text" placeholder="email"/>
+			<br/>
+			<input wicket:id="telefone" type="text" placeholder="nome"/>
+			<br/>
+			<button type="submit" name="submit">Salvar</button>
+		</form>
 	</wicket:extend>
 </body>
 </html>
