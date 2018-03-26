@@ -1,11 +1,14 @@
 package tk.douglazsilva.agendaeletronica;
 
+import java.sql.Connection;
+
 import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.form.TextField;
 import org.apache.wicket.model.CompoundPropertyModel;
 
 import tk.douglazsilva.agendaeletronica.contato.Contato;
+import tk.douglazsilva.agendaeletronica.contato.ContatoDAO;
 
 public class Criar extends BasePage{	
 	
@@ -22,9 +25,9 @@ public class Criar extends BasePage{
 			@Override
 			protected void onSubmit() {
 				Contato contatoSubmetido = getModelObject();
-				System.out.println("Contato a inserir: " + contatoSubmetido);
+				salvar(contatoSubmetido);
 				setResponsePage(Inicio.class);
-			}
+			}			
 			
 		};
 		add(form);
@@ -33,6 +36,13 @@ public class Criar extends BasePage{
 		TextField<String> inputEmail = new TextField<String>("email");
 		TextField<String> inputTelefone = new TextField<String>("telefone");
 		form.add(inputNome,inputEmail, inputTelefone);
+	}
+	
+	private void salvar(Contato contatoSubmetido) {
+		//System.out.println("Contato a inserir: " + contatoSubmetido);
+		Connection conexao = ((WicketApplication) getApplication()).getConexao();
+		ContatoDAO dao = new ContatoDAO(conexao);
+		dao.inserir(contatoSubmetido);
 	}
 
 }
