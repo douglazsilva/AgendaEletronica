@@ -1,14 +1,18 @@
 package tk.douglazsilva.agendaeletronica;
 
 import java.sql.Connection;
+import java.util.Arrays;
 
 import org.apache.wicket.markup.html.basic.Label;
+import org.apache.wicket.markup.html.form.DropDownChoice;
 import org.apache.wicket.markup.html.form.Form;
+import org.apache.wicket.markup.html.form.IChoiceRenderer;
 import org.apache.wicket.markup.html.form.TextField;
 import org.apache.wicket.model.CompoundPropertyModel;
 
 import tk.douglazsilva.agendaeletronica.contato.Contato;
 import tk.douglazsilva.agendaeletronica.contato.ContatoDAO;
+import tk.douglazsilva.agendaeletronica.contato.EstadoCivil;
 
 public class Criar extends BasePage{	
 	
@@ -35,7 +39,22 @@ public class Criar extends BasePage{
 		TextField<String> inputNome = new TextField<String>("nome");
 		TextField<String> inputEmail = new TextField<String>("email");
 		TextField<String> inputTelefone = new TextField<String>("telefone");
-		form.add(inputNome,inputEmail, inputTelefone);
+		DropDownChoice<EstadoCivil> comboEstadoCivil = new DropDownChoice<EstadoCivil>("estadoCivil", 
+				Arrays.asList(EstadoCivil.values()), new IChoiceRenderer<EstadoCivil>() {
+					
+					private static final long serialVersionUID = 9115153490742453499L;					
+
+					@Override
+					public Object getDisplayValue(EstadoCivil arg0) {						
+						return arg0.getLabel();
+					}
+
+					@Override
+					public String getIdValue(EstadoCivil arg0, int arg1) {						
+						return arg0.name();
+					}
+		});
+		form.add(inputNome,inputEmail, inputTelefone, comboEstadoCivil);
 	}
 	
 	private void salvar(Contato contatoSubmetido) {
