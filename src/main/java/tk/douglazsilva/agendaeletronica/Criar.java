@@ -3,12 +3,18 @@ package tk.douglazsilva.agendaeletronica;
 import java.sql.Connection;
 import java.util.Arrays;
 
+import org.apache.wicket.feedback.ErrorLevelFeedbackMessageFilter;
+import org.apache.wicket.feedback.FeedbackMessage;
 import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.form.DropDownChoice;
 import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.form.IChoiceRenderer;
 import org.apache.wicket.markup.html.form.TextField;
+import org.apache.wicket.markup.html.panel.FeedbackPanel;
 import org.apache.wicket.model.CompoundPropertyModel;
+import org.apache.wicket.model.Model;
+import org.apache.wicket.validation.validator.EmailAddressValidator;
+import org.apache.wicket.validation.validator.StringValidator;
 
 import tk.douglazsilva.agendaeletronica.contato.Contato;
 import tk.douglazsilva.agendaeletronica.contato.ContatoDAO;
@@ -39,6 +45,7 @@ public class Criar extends BasePage{
 		TextField<String> inputNome = new TextField<String>("nome");
 		TextField<String> inputEmail = new TextField<String>("email");
 		TextField<String> inputTelefone = new TextField<String>("telefone");
+		//combobox
 		DropDownChoice<EstadoCivil> comboEstadoCivil = new DropDownChoice<EstadoCivil>("estadoCivil", 
 				Arrays.asList(EstadoCivil.values()), new IChoiceRenderer<EstadoCivil>() {
 					
@@ -55,6 +62,12 @@ public class Criar extends BasePage{
 					}
 		});
 		form.add(inputNome,inputEmail, inputTelefone, comboEstadoCivil);
+		
+		//adicionando validadores
+		inputNome.setLabel(Model.of("Nome do contato")).setRequired(true).add(StringValidator.maximumLength(10));
+		inputEmail.setLabel(Model.of("E-mail do contato")).setRequired(true).add(EmailAddressValidator.getInstance());
+		
+		add(new FeedbackPanel("feedbackMessage", new ErrorLevelFeedbackMessageFilter(FeedbackMessage.ERROR)));
 	}
 	
 	private void salvar(Contato contatoSubmetido) {
