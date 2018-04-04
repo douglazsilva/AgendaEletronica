@@ -16,6 +16,7 @@ public class Editar extends Criar {
 		replace(new Label("titulo", "Edição de Contato"));
 	}	
 	
+	@Override
 	protected void salvar(Contato contatoSubmetido) {
 		Connection conexao = ((WicketApplication) getApplication()).getConexao();
 		ContatoDAO dao = new ContatoDAO(conexao);

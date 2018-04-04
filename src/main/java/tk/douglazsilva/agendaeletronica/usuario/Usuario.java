@@ -1,4 +1,4 @@
-package tk.douglazsilva.agendaeletronica.contato;
+package tk.douglazsilva.agendaeletronica.usuario;
 
 public class Usuario {
 	

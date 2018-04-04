@@ -1,4 +1,4 @@
-package tk.douglazsilva.agendaeletronica.contato;
+package tk.douglazsilva.agendaeletronica.usuario;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

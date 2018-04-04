@@ -28,7 +28,7 @@ public class Criar extends BasePage{
 		this(new Contato());
 	}
 	
-	public Criar(Contato contato) {
+	protected Criar(Contato contato) {
 		add(new Label("titulo", "Criação de Contato"));	
 		CompoundPropertyModel<Contato> compoundPropertyModelContato = new CompoundPropertyModel<Contato>(contato);
 		Form<Contato> form = new Form<Contato>("formularioContato",compoundPropertyModelContato) {			
@@ -71,7 +71,7 @@ public class Criar extends BasePage{
 		add(new FeedbackPanel("feedbackMessage", new ErrorLevelFeedbackMessageFilter(FeedbackMessage.ERROR)));
 	}
 	
-	private void salvar(Contato contatoSubmetido) {
+	protected void salvar(Contato contatoSubmetido) {
 		//System.out.println("Contato a inserir: " + contatoSubmetido);
 		Connection conexao = ((WicketApplication) getApplication()).getConexao();
 		ContatoDAO dao = new ContatoDAO(conexao);
