@@ -25,9 +25,11 @@ public class Criar extends BasePage{
 	private static final long serialVersionUID = 3762781362998387919L;
 
 	public Criar() {
-		add(new Label("titulo", "Criação de Contato"));
-		
-		Contato contato = new Contato();
+		this(new Contato());
+	}
+	
+	public Criar(Contato contato) {
+		add(new Label("titulo", "Criação de Contato"));	
 		CompoundPropertyModel<Contato> compoundPropertyModelContato = new CompoundPropertyModel<Contato>(contato);
 		Form<Contato> form = new Form<Contato>("formularioContato",compoundPropertyModelContato) {			
 			private static final long serialVersionUID = -5576287141403246286L;
@@ -38,7 +40,6 @@ public class Criar extends BasePage{
 				salvar(contatoSubmetido);
 				setResponsePage(Inicio.class);
 			}			
-			
 		};
 		add(form);
 		
@@ -64,7 +65,7 @@ public class Criar extends BasePage{
 		form.add(inputNome,inputEmail, inputTelefone, comboEstadoCivil);
 		
 		//adicionando validadores
-		inputNome.setLabel(Model.of("Nome do contato")).setRequired(true).add(StringValidator.maximumLength(10));
+		inputNome.setLabel(Model.of("Nome do contato")).setRequired(true).add(StringValidator.maximumLength(20));
 		inputEmail.setLabel(Model.of("E-mail do contato")).setRequired(true).add(EmailAddressValidator.getInstance());
 		
 		add(new FeedbackPanel("feedbackMessage", new ErrorLevelFeedbackMessageFilter(FeedbackMessage.ERROR)));
@@ -76,5 +77,4 @@ public class Criar extends BasePage{
 		ContatoDAO dao = new ContatoDAO(conexao);
 		dao.inserir(contatoSubmetido);
 	}
-
 }
